@@ -16,8 +16,8 @@ Gem::Specification.new do |spec|
   spec.bindir        = "exe"
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
-  spec.platform = "java"
-  spec.license = "GPLv2"
+  spec.platform      = "java"
+  spec.license       = "GPLv2"
 
   spec.add_runtime_dependency "norikra"
   spec.add_runtime_dependency "mackerel-client"
