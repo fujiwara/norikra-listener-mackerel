@@ -22,13 +22,19 @@ module Norikra
 
         @client = ::Mackerel::Client.new(:mackerel_api_key => api_key)
         debug "Initialized mackerel-client api_key:#{api_key}"
+
+        @service, @prefix = @service.split('.', 2)
       end
 
       def process_async(events)
         metrics = []
         events.each do |time, record|
           record.each do |k, v|
-            metrics.push({ time: time.to_i, name: k, value: v })
+            if @prefix
+              metrics.push({ time: time.to_i, name: @prefix + '.' + k, value: v })
+            else
+              metrics.push({ time: time.to_i, name: k, value: v })
+            end
           end
         end
         debug "post_service_metriccs(#{@service}, #{metrics})"
